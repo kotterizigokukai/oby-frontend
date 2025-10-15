@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/folke/neoconf.nvim/main/schemas/neoconf.json",
+  "lspconfig": {
+    "tsserver": {
+      "enabled": true,
+      "settings": {
+        "typescript": {
+          "format": {
+            "indentSize": 2,
+            "tabSize": 2,
+            "insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+            "insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false
+          },
+          "preferences": {
+            "importModuleSpecifier": "relative",
+            "quotePreference": "single"
+          }
+        }
+      }
+    },
+    "eslint": {
+      "enabled": true,
+      "autoFixOnSave": true,
+      "codeAction": {
+        "disableRuleComment": {
+          "enable": true,
+          "location": "separateLine"
+        },
+        "showDocumentation": {
+          "enable": true
+        }
+      }
+    }
+  }
+}
