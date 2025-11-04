@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
 import Header from '@/components/layout/Header';
 
 const RegisterPage: React.FC = () => {
   const [error, setError] = useState<string>('');
-  const navigate = useNavigate();
 
   const handleGoogleSuccess = (credentialResponse: any) => {
     console.log('Google Registration Success:', credentialResponse);
     // ここでバックエンドに認証情報を送信
-    // 仮の処理：登録成功としてダッシュボードにリダイレクト
-    navigate('/dashboard');
+    console.log('登録が完了しました');
   };
 
   const handleGoogleError = () => {
@@ -27,7 +25,10 @@ const RegisterPage: React.FC = () => {
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">アカウントを作成</CardTitle>
           <CardDescription className="text-center">
-            お好きな方法で登録してください
+            以下の方法からご登録ください
+            <p className="mt-2">
+              現在、Googleアカウントでのみ登録可能です。
+            </p>
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -55,11 +56,6 @@ const RegisterPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="text-center py-4">
-            <p className="text-sm text-gray-600">
-              現在、Googleアカウントでのみ登録可能です。
-            </p>
-          </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
           <div className="text-sm text-center text-gray-600">

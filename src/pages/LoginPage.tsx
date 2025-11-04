@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
 import Header from '@/components/layout/Header';
 
 const LoginPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   const handleSuccess = (credentialResponse: any) => {
     console.log('Login Success:', credentialResponse);
     // ここでバックエンドに認証情報を送信する処理を追加
-    // 成功したらダッシュボードなどにリダイレクト
-    navigate('/dashboard');
+    // ログイン成功時の処理
+    console.log('ログインに成功しました');
   };
 
   const handleError = () => {
@@ -30,7 +29,7 @@ const LoginPage: React.FC = () => {
               アカウントにログイン
             </CardTitle>
             <CardDescription className="text-center">
-              サービスをご利用になるにはログインしてください
+              以下の方法からログインしてください
             </CardDescription>
           </CardHeader>
           
