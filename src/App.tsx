@@ -1,5 +1,21 @@
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from '@/pages/LoginPage';
+import RegisterPage from '@/pages/RegisterPage';
+
 function App() {
-  return <div>お部屋ランキング</div>
+  return (
+    <div className="min-h-screen w-full flex flex-col">
+      <Router>
+        <div className="flex-1 flex flex-col">
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </div>
+  );
 }
 
-export default App
+export default App;
