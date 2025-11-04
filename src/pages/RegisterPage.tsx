@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
 import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 
 const RegisterPage: React.FC = () => {
   const [error, setError] = useState<string>('');
@@ -72,7 +71,6 @@ const RegisterPage: React.FC = () => {
         </CardFooter>
         </Card>
       </main>
-      <Footer />
     </div>
   );
 };

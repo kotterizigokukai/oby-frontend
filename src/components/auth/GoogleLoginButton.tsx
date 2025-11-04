@@ -22,7 +22,9 @@ const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
   if (!clientId) {
-    console.error('Google Client ID is not set. Please set VITE_GOOGLE_CLIENT_ID environment variable.');
+    console.error(
+      'Google Client ID is not set. Please set VITE_GOOGLE_CLIENT_ID environment variable.'
+    );
     return (
       <Button variant="outline" className={`w-full ${className}`} disabled>
         <FcGoogle className="mr-2 h-4 w-4" />

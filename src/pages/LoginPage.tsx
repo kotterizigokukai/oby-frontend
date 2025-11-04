@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
 import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 
 const LoginPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -79,7 +78,6 @@ const LoginPage: React.FC = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };
