@@ -1,4 +1,5 @@
 <!-- I want to review in Japanese. -->
+<!-- 日本語でレビューしてください -->
 
 ## 関連Issue
 
@@ -29,3 +30,4 @@ Closes #
 <!-- for GitHub Copilot review  rule-->
 
 <!-- I want to review in Japanese. -->
+<!-- 日本語でレビューしてください -->
