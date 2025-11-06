@@ -1,72 +1,56 @@
-import { Button } from "../components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
-import { Settings, LogOut, ChevronRight } from "lucide-react";
+import { Edit } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { CustomAvatar } from "../components/ui/custom-avatar";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader } from "../components/ui/card";
+import Header from "../components/layout/Header";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
 
-  const menuItems = [
-    { 
-      icon: <Settings className="h-5 w-5 text-gray-700" />, 
-      label: '設定',
-      onClick: () => navigate('/settings')
-    },
-    { 
-      icon: <LogOut className="h-5 w-5 text-gray-700" />, 
-      label: 'ログアウト',
-      onClick: () => console.log('Logout')
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="sticky top-0 z-10 bg-white px-4 py-3 flex items-center justify-between">
-        <h1 className="text-lg font-bold">プロフィール</h1>
-        <button 
-          onClick={() => navigate('/profile/edit')}
-          className="text-blue-600 text-sm font-medium"
-        >
-          編集
-        </button>
-      </div>
-
-      {/* Profile Section */}
-      <div className="p-6 flex flex-col items-center">
-        <div className="relative mb-4">
-          <Avatar className="h-24 w-24">
-            <AvatarImage src="/placeholder-user.jpg" alt="@user" />
-            <AvatarFallback>US</AvatarFallback>
-          </Avatar>
-        </div>
-        <h2 className="text-xl font-bold">山田 太郎</h2>
-        <p className="text-gray-500 text-sm">yamada@example.com</p>
-      </div>
-
-      {/* Menu Items */}
-      <div className="border-t border-b border-gray-100">
-        {menuItems.map((item, index) => (
-          <button
-            key={index}
-            onClick={item.onClick}
-            className="w-full flex items-center justify-between p-4 hover:bg-gray-50"
-          >
-            <div className="flex items-center space-x-3">
-              <div className="p-1.5 bg-gray-100 rounded-lg">
-                {item.icon}
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1 flex items-center justify-center bg-gray-50 p-4 sm:p-6 lg:p-8">
+        <div className="w-full flex justify-center">
+          <Card className="w-full max-w-md">
+            <CardHeader className="space-y-1 pb-2">
+              <div className="flex justify-center">
+                <div className="relative">
+                  <CustomAvatar 
+                    src="/placeholder-user.jpg" 
+                    alt="User"
+                    size="xl"
+                    className="h-20 w-20 border-2 border-gray-200"
+                  />
+                </div>
               </div>
-              <span className="text-gray-800">{item.label}</span>
-            </div>
-            <ChevronRight className="h-5 w-5 text-gray-400" />
-          </button>
-        ))}
-      </div>
-
-      {/* App Version */}
-      <div className="fixed bottom-6 left-0 right-0 text-center">
-        <p className="text-xs text-gray-400">アプリバージョン 1.0.0</p>
-      </div>
+            </CardHeader>
+            
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <div className="text-center space-y-3">
+                  <h2 className="text-xl font-semibold">山田 太郎</h2>
+                  <div className="text-gray-700 text-sm leading-relaxed px-4">
+                    こんにちは！デザインとコーディングが大好きなエンジニアです。
+                    新しい技術を学ぶことと、美しいUI/UXを作ることが趣味です。
+                    よろしくお願いします！
+                  </div>
+                </div>
+                
+                <Button 
+                  onClick={() => navigate('/profile/edit')}
+                  className="w-full flex items-center justify-center space-x-2"
+                  variant="outline"
+                >
+                  <Edit className="h-4 w-4" />
+                  <span>プロフィールを編集</span>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </main>
     </div>
   );
 };
