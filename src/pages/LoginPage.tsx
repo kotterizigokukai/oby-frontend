@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
 import Header from '@/components/layout/Header';
+import { Button } from "../components/ui/button";
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleSuccess = (credentialResponse: any) => {
     console.log('Login Success:', credentialResponse);
@@ -23,7 +26,8 @@ const LoginPage: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1 flex items-center justify-center bg-gray-50 p-4 sm:p-6 lg:p-8">
-        <Card className="w-full max-w-md">
+        <div className="w-full flex justify-center">
+          <Card className="w-full max-w-md">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">
               アカウントにログイン
@@ -67,18 +71,30 @@ const LoginPage: React.FC = () => {
                 </div>
               </div>
               
-              <div className="text-center text-sm">
-                <p className="text-muted-foreground">
-                  アカウントをお持ちでない場合は、
-                  <Link to="/register" className="font-medium text-primary hover:underline">
-                    新規登録
-                  </Link>
-                  またはGoogleアカウントでログインできます
-                </p>
+              <div className="text-center text-sm mt-4 space-y-4">
+              <div>
+                アカウントをお持ちでない方は{' '}
+                <Link to="/register" className="text-blue-600 hover:underline">
+                  新規登録
+                </Link>
+              </div>
+              
+              {/* 開発用: 認証をスキップしてプロフィールページにアクセス */}
+              <div className="pt-4 border-t border-gray-100">
+                <p className="text-xs text-gray-500 mb-2">開発用</p>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => navigate('/profile')}
+                >
+                  認証をスキップしてプロフィールを確認
+                </Button>
               </div>
             </div>
+            </div>
           </CardContent>
-        </Card>
+          </Card>
+        </div>
       </main>
     </div>
   );
