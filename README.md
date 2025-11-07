@@ -15,11 +15,6 @@
 
 #### 1. direnvのインストール（一度だけ）
 
-<<<<<<< HEAD
-=======
-以下のコマンドで Node.js / npm がインストール済みか確認。
-
->>>>>>> ca8f08d (update:アカウント作成画面の謎の空白の解消)
 ```bash
 # Arch Linux
 sudo pacman -S direnv
@@ -31,7 +26,6 @@ brew install direnv
 sudo apt install direnv
 ```
 
-<<<<<<< HEAD
 #### 2. シェルに統合（一度だけ）
 
 `~/.zshrc` または `~/.bashrc` に以下を手動で追加：
@@ -99,9 +93,6 @@ nvm use
 ```
 
 ## 動作
-=======
-## 導入手順
->>>>>>> ca8f08d (update:アカウント作成画面の謎の空白の解消)
 
 ```bash
 npm install
