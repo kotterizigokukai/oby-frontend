@@ -28,3 +28,6 @@ dist-ssr
 .nvimrc
 .exrc
 .nvim
+
+# direnv
+.direnv/

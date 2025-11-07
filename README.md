@@ -1,30 +1,85 @@
-# フロントエンド環境構築手順
+# フロントエンド環境構築手順 getting started
 
 ## 前提条件
 
 - **Node.js**: v22.x
 - **npm**: v10.x以上
-- **nvm** (Node Version Manager) の導入を推奨
+- **direnv**: プロジェクトディレクトリに入ると自動的にNode.jsバージョンを切り替え
+- **nvm** (Node Version Manager): Node.jsバージョン管理ツール
 
 ## 環境セットアップ
 
-### 1. nvmのインストール (未インストールの場合)
+### 🚀 推奨: direnvで自動切り替え
+
+プロジェクトディレクトリに入るだけで自動的にNode.js v22に切り替わります。
+
+#### 1. direnvのインストール（一度だけ）
 
 ```bash
-# macOS/Linux
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+# Arch Linux
+sudo pacman -S direnv
 
-# arch linux pacman
-sudo pacman -S nvm
-# 必要があれば以下のコマンドで現在のターミナルに適用
-source /usr/share/nvm/init-nvm.sh
+# macOS
+brew install direnv
 
-# インストール後、ターミナルを再起動
+# Ubuntu/Debian
+sudo apt install direnv
 ```
 
-### 2. Node.jsバージョンの統一
+#### 2. シェルに統合（一度だけ）
 
-プロジェクトでは `.nvmrc` でNode.jsバージョンを管理しています。
+`~/.zshrc` または `~/.bashrc` に以下を手動で追加：
+
+```bash
+# zshの場合
+eval "$(direnv hook zsh)"
+
+# bashの場合
+eval "$(direnv hook bash)"
+```
+
+設定後、ターミナルを再起動またはソースを再読み込み：
+
+```bash
+source ~/.zshrc  # または source ~/.bashrc
+```
+
+#### 3. nvmのインストール（未インストールの場合）
+
+```bash
+# Arch Linux
+sudo pacman -S nvm
+source /usr/share/nvm/init-nvm.sh  # 現在のターミナルに適用
+
+# macOS/Linux
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+```
+
+#### 4. プロジェクトのセットアップ
+
+```bash
+# プロジェクトディレクトリに移動
+cd oby-frontend
+
+# direnvを許可（初回のみ）
+direnv allow
+
+# 自動的にNode.js v22がインストール・切り替えされます
+# "direnv: loading ~/dev/team/oby-frontend/.envrc" と表示されればOK
+```
+
+#### 5. バージョン確認
+
+```bash
+node -v   # v22.x.x と表示されることを確認
+npm -v    # v10.x.x と表示されることを確認
+```
+
+---
+
+### 🔧 代替: 手動でバージョン切り替え
+
+direnvを使わない場合は、毎回手動で切り替えが必要です。
 
 ```bash
 # プロジェクトディレクトリで実行
@@ -37,49 +92,9 @@ nvm use --delete-prefix
 nvm use
 ```
 
-### 3. バージョン確認
-
-以下のコマンドで正しいバージョンが使用されているか確認。
-
-```bash
-node -v   # v22.x.x と表示されることを確認
-npm -v    # v10.x.x と表示されることを確認
-```
-
-## 導入手順
+## 動作
 
 ```bash
 npm install
 npm run dev
-```
-
-## 注意事項
-
-- **チーム開発**: 必ず `.nvmrc` で指定されたNode.jsバージョンを使用してください
-- **バージョン違い**: 異なるバージョンを使うと `package-lock.json` に大量の差分が発生します
-- **Omarchyユーザー**: `~/.npmrc`に`prefix`設定がある場合は `nvm use --delete-prefix` を使用してください
-- **初回セットアップ後**: プロジェクトディレクトリで作業する前に必ず `nvm use --delete-prefix` を実行してください
-
-## トラブルシューティング
-
-### nvmエラー: "Your user's .npmrc file has a `prefix` setting"
-
-Omarchyなどで`~/.npmrc`に`prefix`が設定されている場合、以下を実行：
-
-```bash
-nvm use --delete-prefix
-```
-
-または、自動切り替えを設定（`~/.zshrc`または`~/.bashrc`に追加）：
-
-```bash
-# .nvmrcがあるディレクトリでは自動的にNode.jsバージョンを切り替え
-autoload -U add-zsh-hook
-load-nvmrc() {
-  if [[ -f .nvmrc ]]; then
-    nvm use --delete-prefix 2>/dev/null || nvm use
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc  # 現在のディレクトリでも実行
 ```
