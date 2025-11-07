@@ -1,7 +1,7 @@
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Button } from "../components/ui/button";
-import { ArrowLeft, Camera, Save, ChevronLeft } from "lucide-react";
+import { Camera, Save, ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import React from 'react';
 import { CustomAvatar } from "../components/ui/custom-avatar";
