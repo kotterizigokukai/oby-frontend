@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
 import Header from '@/components/layout/Header';
+import type { UserResponse } from '@/api/generated/openAPIDefinition.schemas';
 
 const RegisterPage: React.FC = () => {
   const [error, setError] = useState<string>('');
 
-  const handleGoogleSuccess = (credentialResponse: any) => {
+  const handleGoogleSuccess = (credentialResponse: UserResponse) => {
     console.log('Google Registration Success:', credentialResponse);
-    // ここでバックエンドに認証情報を送信
+    // バックエンドで認証処理が完了
     console.log('登録が完了しました');
   };
 
@@ -22,24 +23,24 @@ const RegisterPage: React.FC = () => {
       <Header />
       <main className="flex-1 flex items-center justify-center bg-gray-50 p-4 sm:p-6 lg:p-8">
         <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">アカウントを作成</CardTitle>
-          <CardDescription className="text-center">
-            以下の方法からご登録ください
-            <p className="mt-2">
-              現在、Googleアカウントでのみ登録可能です。
-            </p>
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm">
-              {error}
-            </div>
-          )}
-          
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-2xl font-bold text-center">
+              アカウントを作成
+            </CardTitle>
+            <CardDescription className="text-center">
+              以下の方法からご登録ください
+              <p className="mt">現在、Googleアカウントでのみ登録可能です。</p>
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {error && (
+              <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm">
+                {error}
+              </div>
+            )}
+
           <div className="space-y-4">
-            <GoogleLoginButton 
+            <GoogleLoginButton
               onSuccess={handleGoogleSuccess}
               onError={handleGoogleError}
               buttonText="Googleで登録"
