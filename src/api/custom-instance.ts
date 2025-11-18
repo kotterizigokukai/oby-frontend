@@ -15,29 +15,26 @@ export const customInstance = async <T>(
     signal?: AbortSignal;
     headers?: Record<string, string>;
   },
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<T> => {
   const { url, method, data, signal, headers } = config;
 
   // FormDataの場合はContent-Typeヘッダーを自動設定させる
   const isFormData = data instanceof FormData;
-  const contentTypeHeaders =
-    headers && !isFormData
-      ? headers
-      : isFormData
-        ? undefined // FormDataの場合はブラウザに任せる
-        : headers;
+
+  // FormDataの場合、Content-Typeは除外するが、他のヘッダーは保持
+  const requestHeaders = isFormData
+    ? Object.fromEntries(
+        Object.entries(headers || {}).filter(([key]) => key.toLowerCase() !== 'content-type')
+      )
+    : headers;
 
   const fetchOptions: RequestInit = {
     ...options,
     method,
     signal,
-    headers: contentTypeHeaders,
-    ...(isFormData
-      ? { body: data as FormData }
-      : data
-        ? { body: JSON.stringify(data) }
-        : {}),
+    headers: requestHeaders,
+    ...(isFormData ? { body: data as FormData } : data ? { body: JSON.stringify(data) } : {}),
   };
 
   const response = await fetchWithCsrf(url, fetchOptions);
