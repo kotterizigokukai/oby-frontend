@@ -1,6 +1,23 @@
 import { fetchWithCsrf } from '@/utils/csrf';
 
 /**
+ * APIエラークラス
+ */
+export class ApiError extends Error {
+  status: number;
+  statusText: string;
+  data: unknown;
+
+  constructor(status: number, statusText: string, data: unknown) {
+    super(`API Error: ${status} ${statusText}`);
+    this.name = 'ApiError';
+    this.status = status;
+    this.statusText = statusText;
+    this.data = data;
+  }
+}
+
+/**
  * Orval用カスタムインスタンス
  *
  * すべてのAPI呼び出しでfetchWithCsrfを使用することで、
@@ -41,11 +58,7 @@ export const customInstance = async <T>(
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw {
-      status: response.status,
-      statusText: response.statusText,
-      data: errorData,
-    };
+    throw new ApiError(response.status, response.statusText, errorData);
   }
 
   // 204 No Contentの場合は空オブジェクトを返す

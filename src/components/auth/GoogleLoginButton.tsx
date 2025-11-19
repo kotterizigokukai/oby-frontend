@@ -1,11 +1,8 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { FcGoogle } from 'react-icons/fc';
-import type { UserResponse } from '@/api/generated/openAPIDefinition.schemas';
 
 interface GoogleLoginButtonProps {
-  onSuccess?: (response: UserResponse) => void;
-  onError?: () => void;
   buttonText?: string;
   className?: string;
 }

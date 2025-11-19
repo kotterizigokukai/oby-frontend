@@ -18,17 +18,14 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:8080',
         changeOrigin: true,
-        credentials: 'include',
       },
       '/oauth2': {
         target: 'http://localhost:8080',
         changeOrigin: true,
-        credentials: 'include',
       },
       '/login': {
         target: 'http://localhost:8080',
         changeOrigin: true,
-        credentials: 'include',
       },
     },
   },

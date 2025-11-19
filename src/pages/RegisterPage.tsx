@@ -1,22 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
 import Header from '@/components/layout/Header';
-import type { UserResponse } from '@/api/generated/openAPIDefinition.schemas';
 
 const RegisterPage: React.FC = () => {
-  const [error, setError] = useState<string>('');
-
-  const handleGoogleSuccess = (credentialResponse: UserResponse) => {
-    console.log('Google Registration Success:', credentialResponse);
-    // バックエンドで認証処理が完了
-    console.log('登録が完了しました');
-  };
-
-  const handleGoogleError = () => {
-    setError('Googleアカウントでの登録に失敗しました。もう一度お試しください。');
-  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -29,20 +17,12 @@ const RegisterPage: React.FC = () => {
             </CardTitle>
             <CardDescription className="text-center">
               以下の方法からご登録ください
-              <p className="mt">現在、Googleアカウントでのみ登録可能です。</p>
+              <p className="mt-2">現在、Googleアカウントでのみ登録可能です。</p>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {error && (
-              <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm">
-                {error}
-              </div>
-            )}
-
           <div className="space-y-4">
             <GoogleLoginButton
-              onSuccess={handleGoogleSuccess}
-              onError={handleGoogleError}
               buttonText="Googleで登録"
               className="w-full justify-center"
             />
