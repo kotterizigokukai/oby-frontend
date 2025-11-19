@@ -1,47 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
 import Header from '@/components/layout/Header';
 
 const RegisterPage: React.FC = () => {
-  const [error, setError] = useState<string>('');
-
-  const handleGoogleSuccess = (credentialResponse: any) => {
-    console.log('Google Registration Success:', credentialResponse);
-    // ここでバックエンドに認証情報を送信
-    console.log('登録が完了しました');
-  };
-
-  const handleGoogleError = () => {
-    setError('Googleアカウントでの登録に失敗しました。もう一度お試しください。');
-  };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1 flex items-center justify-center bg-gray-50 p-4 sm:p-6 lg:p-8">
         <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">アカウントを作成</CardTitle>
-          <CardDescription className="text-center">
-            以下の方法からご登録ください
-            <p className="mt-2">
-              現在、Googleアカウントでのみ登録可能です。
-            </p>
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm">
-              {error}
-            </div>
-          )}
-          
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-2xl font-bold text-center">
+              アカウントを作成
+            </CardTitle>
+            <CardDescription className="text-center">
+              以下の方法からご登録ください
+              <p className="mt-2">現在、Googleアカウントでのみ登録可能です。</p>
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
           <div className="space-y-4">
-            <GoogleLoginButton 
-              onSuccess={handleGoogleSuccess}
-              onError={handleGoogleError}
+            <GoogleLoginButton
               buttonText="Googleで登録"
               className="w-full justify-center"
             />
