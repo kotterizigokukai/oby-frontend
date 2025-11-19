@@ -31,6 +31,96 @@ export interface ProfileResponse {
 }
 
 /**
+ * 部屋投稿作成リクエスト
+ */
+export interface CreateRoomPostRequest {
+  /** 部屋の画像ファイル */
+  image: Blob;
+  /** 投稿タイトル (1-100文字) */
+  title: string;
+  /** 投稿の説明文 (最大1000文字) */
+  description?: string;
+}
+
+/**
+ * 部屋投稿情報
+ */
+export interface RoomPostResponse {
+  /** 部屋投稿ID */
+  id: string;
+  /** 投稿者のユーザーID */
+  userId: string;
+  /** 投稿タイトル */
+  title: string;
+  /** 画像URL */
+  imageUrl: string;
+  /** 投稿の説明文 */
+  description?: string;
+  /** 作成日時 */
+  createdAt: string;
+  /** 更新日時 */
+  updatedAt: string;
+}
+
+/**
+ * 部屋投稿一覧アイテム
+ */
+export interface RoomPostListItemResponse {
+  /** 部屋投稿ID */
+  id: string;
+  /** 投稿者のユーザーID */
+  userId: string;
+  /** 投稿者のニックネーム */
+  userNickname: string;
+  /** 投稿者のアイコン画像URL */
+  userAvatarUrl?: string;
+  /** 投稿タイトル */
+  title: string;
+  /** 画像URL */
+  imageUrl: string;
+  /** 投稿の説明文 */
+  description?: string;
+  /** 作成日時 */
+  createdAt: string;
+}
+
+/**
+ * 部屋投稿一覧レスポンス（カーソルベースページネーション）
+ */
+export interface RoomPostListResponse {
+  /** 部屋投稿一覧 */
+  items: RoomPostListItemResponse[];
+  /** 次のページのカーソル（最後のページの場合はnull） */
+  nextCursor?: string;
+  /** 次のページが存在するか */
+  hasMore: boolean;
+}
+
+/**
+ * 部屋投稿詳細情報（ユーザー情報含む）
+ */
+export interface RoomPostDetailResponse {
+  /** 部屋投稿ID */
+  id: string;
+  /** 投稿者のユーザーID */
+  userId: string;
+  /** 投稿者のニックネーム */
+  userNickname: string;
+  /** 投稿者のアイコン画像URL */
+  userAvatarUrl?: string;
+  /** 投稿タイトル */
+  title: string;
+  /** 画像URL */
+  imageUrl: string;
+  /** 投稿の説明文 */
+  description?: string;
+  /** 作成日時 */
+  createdAt: string;
+  /** 更新日時 */
+  updatedAt: string;
+}
+
+/**
  * 認証ユーザー情報
  */
 export interface UserResponse {
@@ -42,4 +132,15 @@ export interface UserResponse {
 
 export type UploadAvatarBody = {
   avatar: Blob;
+};
+
+export type GetRoomPostsParams = {
+  /**
+   * ページネーション用カーソル（部屋投稿ID）
+   */
+  cursor?: string;
+  /**
+   * 取得件数（デフォルト10件、最大50件）
+   */
+  limit?: number;
 };
