@@ -8,9 +8,7 @@
  * Spring SecurityがセットしたXSRF-TOKEN Cookieからトークンを取得する
  */
 export const getCsrfToken = (): string | null => {
-  const cookie = document.cookie
-    .split('; ')
-    .find((row) => row.startsWith('XSRF-TOKEN='));
+  const cookie = document.cookie.split('; ').find((row) => row.startsWith('XSRF-TOKEN='));
   return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
 };
 
@@ -19,10 +17,7 @@ export const getCsrfToken = (): string | null => {
  *
  * 自動的にCSRFトークンをX-XSRF-TOKENヘッダーに追加する
  */
-export const fetchWithCsrf = async (
-  url: string,
-  options: RequestInit = {}
-): Promise<Response> => {
+export const fetchWithCsrf = async (url: string, options: RequestInit = {}): Promise<Response> => {
   const csrfToken = getCsrfToken();
 
   const headers = new Headers(options.headers);
