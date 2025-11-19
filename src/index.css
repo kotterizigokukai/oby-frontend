@@ -5,7 +5,9 @@
 @tailwind utilities;
 
 /* Reset and base styles */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -63,8 +65,10 @@ body {
   * {
     @apply border-border/50;
   }
-  
-  html, body, #root {
+
+  html,
+  body,
+  #root {
     height: 100%;
     margin: 0;
     padding: 0;

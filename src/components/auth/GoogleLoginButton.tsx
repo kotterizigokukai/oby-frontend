@@ -7,8 +7,7 @@ interface GoogleLoginButtonProps {
   className?: string;
 }
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
   buttonText = 'Googleでログイン',
@@ -20,12 +19,7 @@ const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
   };
 
   return (
-    <Button
-      type="button"
-      variant="outline"
-      className={`w-full ${className}`}
-      onClick={handleClick}
-    >
+    <Button type="button" variant="outline" className={`w-full ${className}`} onClick={handleClick}>
       <FcGoogle className="mr-2 h-5 w-5" />
       {buttonText}
     </Button>
